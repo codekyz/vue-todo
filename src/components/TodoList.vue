@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul">
       <li v-for="(todoItem, index) in propsdata" 
         v-bind:key="todoItem.item" class="shadow">
         
@@ -16,7 +16,7 @@
         </span>
 
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -25,10 +25,10 @@ export default {
   props: ['propsdata'],
 
   methods: {
-    removeTodo: function(todoItem, index) {
+    removeTodo(todoItem, index) {
       this.$emit('removeTodoItem', todoItem, index);
     },
-    toggleComplete: function(todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.$emit('toggleItem', todoItem, index);
     }
   },
@@ -74,6 +74,15 @@ li {
 .removeBtn {
   margin-left: auto;
   color: #de4343;
+}
+
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s ease;
+}
+.list-enter-from, .list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 </style>
