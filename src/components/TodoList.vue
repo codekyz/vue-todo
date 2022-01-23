@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in this.$store.state.todoItems" 
+      <li v-for="(todoItem, index) in this.storedTodoItems" 
         v-bind:key="todoItem.item" class="shadow">
         
         <i class="checkBtn fas fa-check" 
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
 
   methods: {
@@ -31,6 +33,13 @@ export default {
       this.$store.commit('toggleOneItem', { todoItem, index });
     }
   },
+
+  computed: {
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItem;
+    // }
+    ...mapGetters(['storedTodoItems'])
+  }
 
 }
 </script>
